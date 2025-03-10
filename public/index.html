@@ -1083,6 +1083,100 @@
                 padding: 30px;
             }
         }
+        /* Scrollable Navigation Wheel styles */
+        .wheel-nav-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-top: 2px solid var(--accent-dark);
+        padding: 15px 0;
+        z-index: 100;
+        overflow: hidden;
+        }
+
+        .wheel-nav {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+        padding: 0 20%;
+        scroll-behavior: smooth;
+        }
+
+        .wheel-nav::-webkit-scrollbar {
+        display: none; /* Chrome/Safari/Opera */
+        }
+
+        .wheel-nav-item {
+        flex: 0 0 60%;
+        scroll-snap-align: center;
+        text-align: center;
+        padding: 10px 15px;
+        opacity: 0.5;
+        transform: scale(0.85);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        }
+
+        .wheel-nav-item.active {
+        opacity: 1;
+        transform: scale(1);
+        }
+
+        .wheel-nav-item.active::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 35%;
+        width: 30%;
+        height: 3px;
+        background-color: var(--accent);
+        border-radius: 3px;
+        }
+
+        .wheel-nav-icon {
+        font-family: 'Permanent Marker', cursive;
+        font-size: 1.2rem;
+        color: var(--text);
+        display: block;
+        margin-bottom: 5px;
+        }
+
+        .wheel-nav-item.active .wheel-nav-icon {
+        color: var(--accent);
+        }
+
+        .wheel-nav-text {
+        font-size: 0.85rem;
+        white-space: nowrap;
+        color: var(--text);
+        transition: color 0.3s ease;
+        }
+
+        .wheel-nav-item.active .wheel-nav-text {
+        color: var(--accent);
+        }
+
+        /* Hide the original mobile nav when using wheel nav */
+        .mobile-nav {
+        display: none;
+        }
+
+        /* For larger screens we revert to the desktop navigation dots */
+        @media (min-width: 768px) {
+        .wheel-nav-container {
+            display: none;
+        }
+        
+        /* Show original mobile nav if you want to use it for tablets */
+        /* .mobile-nav {
+            display: flex;
+        } */
+        }
     </style>
 </head>
 
@@ -1210,30 +1304,121 @@
             }
         }
         
-        // Enhanced addEventListeners function with product selection support
+        // Function to create the wheel navigation
+        function createWheelNavigation() {
+            const wheelNav = document.getElementById('wheel-nav');
+            if (!wheelNav) return;
+            
+            // Clear existing items
+            wheelNav.innerHTML = '';
+            
+            // Get all sections
+            const sections = document.querySelectorAll('.page-section');
+            let currentSectionId = '';
+            
+            // Determine the current section based on scroll position
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop - 200 && window.scrollY < sectionTop + sectionHeight - 200) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+            
+            // Create navigation items
+            sections.forEach((section, index) => {
+                const sectionId = section.getAttribute('id');
+                const sectionTitle = section.querySelector('.section-title')?.textContent || `Section ${index + 1}`;
+                
+                // Get icon from the existing mobile nav (if available)
+                let icon = "📋"; // Default icon
+                const existingMobileNavItem = document.querySelector(`.mobile-nav-item[data-section="${sectionId}"]`);
+                if (existingMobileNavItem) {
+                    const iconElement = existingMobileNavItem.querySelector('.mobile-nav-icon');
+                    if (iconElement) {
+                        icon = iconElement.textContent;
+                    }
+                }
+                
+                // Create the wheel nav item
+                const navItem = document.createElement('div');
+                navItem.className = `wheel-nav-item ${sectionId === currentSectionId ? 'active' : ''}`;
+                navItem.setAttribute('data-section', sectionId);
+                
+                navItem.innerHTML = `
+                    <span class="wheel-nav-icon">${icon}</span>
+                    <span class="wheel-nav-text">${sectionTitle.length > 15 ? sectionTitle.substring(0, 15) + '...' : sectionTitle}</span>
+                `;
+                
+                // Add click event
+                navItem.addEventListener('click', function() {
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+                
+                wheelNav.appendChild(navItem);
+            });
+            
+            // Scroll to the active item
+            scrollToActiveNavItem();
+        }
+    
+        // Function to scroll the wheel to the active item
+        function scrollToActiveNavItem() {
+            const wheelNav = document.getElementById('wheel-nav');
+            const activeItem = wheelNav.querySelector('.wheel-nav-item.active');
+            
+            if (activeItem) {
+                // Calculate position to center the active item
+                const scrollLeftPosition = activeItem.offsetLeft - (wheelNav.offsetWidth / 2) + (activeItem.offsetWidth / 2);
+                wheelNav.scrollLeft = scrollLeftPosition;
+            }
+        }
+    
+        // Function to update all navigation states
+        function updateAllNavigationActiveStates(currentSection) {
+            // Update mobile nav
+            document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            const mobileNavItem = document.querySelector('.mobile-nav-item[data-section="' + currentSection + '"]');
+            if (mobileNavItem) mobileNavItem.classList.add('active');
+            
+            // Update desktop nav
+            document.querySelectorAll('.desktop-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            const desktopNavItem = document.querySelector('.desktop-nav-item[data-section="' + currentSection + '"]');
+            if (desktopNavItem) desktopNavItem.classList.add('active');
+            
+            // Update wheel nav
+            document.querySelectorAll('.wheel-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            const wheelNavItem = document.querySelector('.wheel-nav-item[data-section="' + currentSection + '"]');
+            if (wheelNavItem) {
+                wheelNavItem.classList.add('active');
+                scrollToActiveNavItem();
+            }
+        }
+        
+        // Enhanced addEventListeners function with product selection support and wheel navigation
         function addEventListeners() {
+            // Create the wheel navigation
+            createWheelNavigation();
+            
             // Navigation functionality
-            document.querySelectorAll('.mobile-nav-item, .desktop-nav-item').forEach(item => {
+            document.querySelectorAll('.mobile-nav-item, .desktop-nav-item, .wheel-nav-item').forEach(item => {
                 item.addEventListener('click', function() {
                     const section = this.getAttribute('data-section');
                     const sectionEl = document.getElementById(section);
                     if (sectionEl) sectionEl.scrollIntoView({behavior: 'smooth'});
                     
-                    // Update active state for mobile nav
-                    document.querySelectorAll('.mobile-nav-item').forEach(i => {
-                        i.classList.remove('active');
-                    });
-                    document.querySelectorAll('.mobile-nav-item[data-section="' + section + '"]').forEach(i => {
-                        i.classList.add('active');
-                    });
-                    
-                    // Update active state for desktop nav
-                    document.querySelectorAll('.desktop-nav-item').forEach(i => {
-                        i.classList.remove('active');
-                    });
-                    document.querySelectorAll('.desktop-nav-item[data-section="' + section + '"]').forEach(i => {
-                        i.classList.add('active');
-                    });
+                    // Update active states for all navigation types
+                    updateAllNavigationActiveStates(section);
                 });
             });
             
@@ -1335,19 +1520,8 @@
                 });
                 
                 if (currentSection) {
-                    // Update mobile nav
-                    document.querySelectorAll('.mobile-nav-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    const mobileNavItem = document.querySelector('.mobile-nav-item[data-section="' + currentSection + '"]');
-                    if (mobileNavItem) mobileNavItem.classList.add('active');
-                    
-                    // Update desktop nav
-                    document.querySelectorAll('.desktop-nav-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    const desktopNavItem = document.querySelector('.desktop-nav-item[data-section="' + currentSection + '"]');
-                    if (desktopNavItem) desktopNavItem.classList.add('active');
+                    // Update all navigation types with the current section
+                    updateAllNavigationActiveStates(currentSection);
                 }
             }, 100); // Limit to once per 100ms
             
@@ -1391,7 +1565,7 @@
             
             // For now, add a placeholder description if none exists
             if (!product.description) {
-                modalDescription.innerHTML = '<p>[Descripcion]</p>';
+                modalDescription.innerHTML = '<p>Product details coming soon.</p>';
             } else {
                 modalDescription.innerHTML = `<p>${product.description}</p>`;
             }
@@ -1402,7 +1576,7 @@
             // Prevent scrolling on the body when modal is open
             document.body.style.overflow = 'hidden';
         }
-
+    
         // Function to close the product modal
         function closeProductModal() {
             const modal = document.getElementById('product-modal');
@@ -1411,7 +1585,7 @@
             // Re-enable scrolling
             document.body.style.overflow = '';
         }
-
+    
         // Function to handle product selection
         function handleProductSelection(card, index) {
             // Get section and product index
@@ -1480,7 +1654,7 @@
                 showProductModal(product);
             }
         }
-
+    
         // Function to set up event listeners for product cards
         function setupProductCardListeners() {
             // Find all product cards
@@ -1526,7 +1700,7 @@
         // Password protection system
         function setupPasswordProtection() {
             // Default password - change this to your desired password
-            const correctPassword = "manito";
+            const correctPassword = "cannabis";
             
             // Check if the user has already entered the password
             const passwordModal = document.getElementById('password-modal');
@@ -1722,7 +1896,7 @@
                                 if (category.prices && Array.isArray(category.prices) && category.prices.length > 0) {
                                     const pricingHeader = document.createElement('div');
                                     pricingHeader.className = 'pricing-header';
-                                    pricingHeader.textContent = 'Precios'; // CHANGED: from 'Pricing' to 'Precios'
+                                    pricingHeader.textContent = 'Precios'; // Changed from 'Pricing' to 'Precios'
                                     categorySection.appendChild(pricingHeader);
                                     
                                     const pricingContainer = document.createElement('div');
@@ -1861,7 +2035,7 @@
                             if (section.prices && Array.isArray(section.prices) && section.prices.length > 0) {
                                 const pricingHeader = document.createElement('div');
                                 pricingHeader.className = 'pricing-header';
-                                pricingHeader.textContent = 'Precios'; // CHANGED: from 'Pricing' to 'Precios'
+                                pricingHeader.textContent = 'Precios'; // Changed from 'Pricing' to 'Precios'
                                 sectionEl.appendChild(pricingHeader);
                                 
                                 const pricingContainer = document.createElement('div');
@@ -1976,7 +2150,7 @@
             }
         }
         
-        // Updated download menu functionality with password protection
+        // Updated download menu functionality with password protection and wheel navigation
         document.getElementById('download-menu').addEventListener('click', async function(e) {
             e.preventDefault();
             
@@ -2024,6 +2198,14 @@
                     });
                 `;
                 docClone.querySelector('body').appendChild(passwordScript);
+                
+                // Add wheel navigation to the offline version if it doesn't exist
+                if (!docClone.querySelector('.wheel-nav-container')) {
+                    const wheelNavContainer = document.createElement('div');
+                    wheelNavContainer.className = 'wheel-nav-container';
+                    wheelNavContainer.innerHTML = '<div class="wheel-nav" id="wheel-nav"></div>';
+                    docClone.querySelector('body').appendChild(wheelNavContainer);
+                }
                 
                 // Remove the serverless function dependency
                 const scriptEl = docClone.querySelector('script');
@@ -2124,5 +2306,11 @@
             setupPasswordProtection(); // Initialize password protection
         });
     </script>
+    
+    <div class="wheel-nav-container">
+        <div class="wheel-nav" id="wheel-nav">
+          <!-- Navigation items will be dynamically added here -->
+        </div>
+      </div>
 </body>
 </html>
