@@ -697,7 +697,7 @@
             font-size: 1.2rem;
         }
         
-        /* NEW: Product selection modal styles */
+        /* MODIFIED: Product selection modal styles with better image display */
         .product-modal {
             position: fixed;
             top: 0;
@@ -752,6 +752,23 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
 
+        .product-modal-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-modal-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
 
         .product-modal-details {
             padding: 20px;
@@ -780,13 +797,7 @@
             opacity: 0.9;
         }
         
-
-        /* Make the card position relative so the button position works */
-        .mobile-strain-card,
-        .donas-item {
-            position: relative;
-        }
-        /* 1. Fixed View Button - smaller and better positioned */
+        /* MODIFIED: View button styles - smaller and better positioned */
         .product-view-button {
             position: absolute;
             top: 8px;
@@ -815,62 +826,133 @@
             justify-content: center;
         }
 
-        /* 2. Fixed Modal Image Display */
-        .product-modal-image {
+        /* NEW: Password protection styles */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 300px;
-            overflow: hidden;
-            position: relative;
-            background-color: rgba(0, 0, 0, 0.5);
+            height: 100%;
+            background-color: var(--primary);
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
 
-        .product-modal-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            object-position: center;
+        .password-modal.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        /* For larger screens - better layout */
-        @media (min-width: 768px) {
-            .product-modal-content {
-                width: 70%;
-                max-width: 900px;
-                display: flex;
-            }
-            
-            .product-modal-image {
-                width: 60%;
-                height: auto;
-                min-height: 350px;
-            }
-            
-            .product-modal-details {
-                width: 40%;
-                padding: 30px;
-            }
+        .password-box {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* For mobile, always show the view button */
-        @media (max-width: 767px) {
-            .product-view-button {
-                opacity: 0.8;
-                transform: translateY(0);
-            }
-            
-            /* Pulse animation to draw attention */
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
-            }
-            
-            .product-view-button {
-                animation: pulse 2s infinite;
-            }
+        .password-header {
+            margin-bottom: 25px;
+        }
+
+        .password-logo {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.5rem;
+            color: var(--accent);
+            text-shadow: 2px 2px 0 #000;
+            margin-bottom: 5px;
+        }
+
+        .password-subtitle {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .password-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .password-prompt {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .password-input {
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            padding: 10px 15px;
+            width: 100%;
+            color: var(--text);
+            font-family: 'Rubik', sans-serif;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .password-error {
+            color: #ff5252;
+            font-size: 0.85rem;
+            min-height: 20px;
+            margin-bottom: 15px;
+        }
+
+        .password-submit {
+            background-color: var(--accent);
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 25px;
+            font-family: 'Rubik', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .password-submit:hover {
+            background-color: var(--accent-dark);
+        }
+
+        /* Lock button in the corner */
+        .lock-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+            z-index: 90;
+        }
+
+        .lock-button:hover {
+            opacity: 1;
         }
         
         @keyframes spin {
@@ -880,6 +962,16 @@
         @keyframes fadeInOut {
             0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
             50% { opacity: 0.7; transform: translateX(-50%) translateY(5px); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s;
         }
         
         /* Default background color */
@@ -976,17 +1068,18 @@
             /* MODIFIED: Product modal for larger screens */
             .product-modal-content {
                 width: 70%;
-                max-width: 700px;
+                max-width: 900px;
                 display: flex;
             }
             
             .product-modal-image {
-                width: 50%;
+                width: 60%;
                 height: auto;
+                min-height: 350px;
             }
             
             .product-modal-details {
-                width: 50%;
+                width: 40%;
                 padding: 30px;
             }
         }
@@ -1019,7 +1112,23 @@
         <div class="loading-text">Creando versión offline...</div>
     </div>
     
-    <!-- NEW: Product modal -->
+    <!-- Password modal -->
+    <div id="password-modal" class="password-modal">
+        <div class="password-box">
+            <div class="password-header">
+                <div class="password-logo">El Tío Green</div>
+                <div class="password-subtitle">Premium Cannabis Collection</div>
+            </div>
+            <div class="password-form">
+                <div class="password-prompt">Enter password to view menu</div>
+                <input type="password" id="password-input" class="password-input" placeholder="Password">
+                <div id="password-error" class="password-error"></div>
+                <button id="password-submit" class="password-submit">Enter</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product modal -->
     <div id="product-modal" class="product-modal">
         <div class="product-modal-content">
             <div class="product-modal-close">&times;</div>
@@ -1101,7 +1210,7 @@
             }
         }
         
-        // MODIFIED: Enhanced addEventListeners function with product selection support
+        // Enhanced addEventListeners function with product selection support
         function addEventListeners() {
             // Navigation functionality
             document.querySelectorAll('.mobile-nav-item, .desktop-nav-item').forEach(item => {
@@ -1201,7 +1310,7 @@
                 shareMenu.classList.remove('visible');
             });
             
-            // NEW: Setup product card listeners
+            // Setup product card listeners
             setupProductCardListeners();
             
             // Optimized scroll handler with throttling
@@ -1246,7 +1355,7 @@
             window.addEventListener('scroll', optimizedScrollHandler);
         }
         
-        // NEW: Function to show the product modal
+        // Function to show the product modal
         function showProductModal(product) {
             const modal = document.getElementById('product-modal');
             const modalImage = document.getElementById('modal-product-image');
@@ -1294,7 +1403,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // NEW: Function to close the product modal
+        // Function to close the product modal
         function closeProductModal() {
             const modal = document.getElementById('product-modal');
             modal.classList.remove('visible');
@@ -1303,7 +1412,7 @@
             document.body.style.overflow = '';
         }
 
-        // NEW: Function to handle product selection
+        // Function to handle product selection
         function handleProductSelection(card, index) {
             // Get section and product index
             const section = card.closest('.page-section');
@@ -1372,7 +1481,7 @@
             }
         }
 
-        // NEW: Function to set up event listeners for product cards
+        // Function to set up event listeners for product cards
         function setupProductCardListeners() {
             // Find all product cards
             const productCards = document.querySelectorAll('.mobile-strain-card, .donas-item');
@@ -1386,7 +1495,7 @@
                 // Add a view button for mobile users (appears on touch/hover)
                 const viewButton = document.createElement('div');
                 viewButton.className = 'product-view-button';
-                viewButton.innerHTML = '<span>👁️</span>';
+                viewButton.innerHTML = '<span>👁️</span>'; // Just the eye icon
                 card.appendChild(viewButton);
                 
                 // Click handler for the view button
@@ -1412,6 +1521,78 @@
                     closeProductModal();
                 }
             });
+        }
+        
+        // Password protection system
+        function setupPasswordProtection() {
+            // Default password - change this to your desired password
+            const correctPassword = "cannabis";
+            
+            // Check if the user has already entered the password
+            const passwordModal = document.getElementById('password-modal');
+            const passwordInput = document.getElementById('password-input');
+            const passwordSubmit = document.getElementById('password-submit');
+            const passwordError = document.getElementById('password-error');
+            
+            // Add a lock button to re-lock the site
+            const lockButton = document.createElement('div');
+            lockButton.className = 'lock-button';
+            lockButton.innerHTML = '🔒';
+            lockButton.title = 'Lock menu';
+            document.body.appendChild(lockButton);
+            
+            // Check if authenticated on page load
+            function checkAuthentication() {
+                const isAuthenticated = localStorage.getItem('elTioGreenAuth') === 'true';
+                
+                if (isAuthenticated) {
+                    passwordModal.classList.add('hidden');
+                } else {
+                    passwordModal.classList.remove('hidden');
+                    passwordInput.focus();
+                }
+            }
+            
+            // Validate password
+            function validatePassword() {
+                const enteredPassword = passwordInput.value.trim();
+                
+                if (enteredPassword === correctPassword) {
+                    // Store authentication in localStorage
+                    localStorage.setItem('elTioGreenAuth', 'true');
+                    passwordModal.classList.add('hidden');
+                    passwordError.textContent = '';
+                    passwordInput.value = '';
+                } else {
+                    passwordError.textContent = 'Incorrect password. Please try again.';
+                    passwordInput.value = '';
+                    // Add a shake animation to the input
+                    passwordInput.classList.add('shake');
+                    setTimeout(() => {
+                        passwordInput.classList.remove('shake');
+                    }, 500);
+                }
+            }
+            
+            // Lock the site
+            function lockSite() {
+                localStorage.removeItem('elTioGreenAuth');
+                passwordModal.classList.remove('hidden');
+                passwordInput.focus();
+            }
+            
+            // Event listeners
+            passwordSubmit.addEventListener('click', validatePassword);
+            lockButton.addEventListener('click', lockSite);
+            
+            passwordInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    validatePassword();
+                }
+            });
+            
+            // Check authentication on page load
+            checkAuthentication();
         }
         
         // Function to generate the menu HTML from the data
@@ -1541,7 +1722,7 @@
                                 if (category.prices && Array.isArray(category.prices) && category.prices.length > 0) {
                                     const pricingHeader = document.createElement('div');
                                     pricingHeader.className = 'pricing-header';
-                                    pricingHeader.textContent = 'Precios';
+                                    pricingHeader.textContent = 'Precios'; // CHANGED: from 'Pricing' to 'Precios'
                                     categorySection.appendChild(pricingHeader);
                                     
                                     const pricingContainer = document.createElement('div');
@@ -1680,7 +1861,7 @@
                             if (section.prices && Array.isArray(section.prices) && section.prices.length > 0) {
                                 const pricingHeader = document.createElement('div');
                                 pricingHeader.className = 'pricing-header';
-                                pricingHeader.textContent = 'Precios';
+                                pricingHeader.textContent = 'Precios'; // CHANGED: from 'Pricing' to 'Precios'
                                 sectionEl.appendChild(pricingHeader);
                                 
                                 const pricingContainer = document.createElement('div');
@@ -1795,7 +1976,7 @@
             }
         }
         
-        // MODIFIED: Fixed download menu functionality to ensure share menu is closed in downloaded file
+        // Updated download menu functionality with password protection
         document.getElementById('download-menu').addEventListener('click', async function(e) {
             e.preventDefault();
             
@@ -1807,14 +1988,13 @@
                 // Create a copy of the current document
                 const docClone = document.documentElement.cloneNode(true);
                 
-                // IMPORTANT FIX: Close the share menu in the downloaded version
-                // Find and remove the 'visible' class from any share-menu elements
+                // Close the share menu in the downloaded version
                 const shareMenus = docClone.querySelectorAll('.share-menu');
                 shareMenus.forEach(menu => {
                     menu.classList.remove('visible');
                 });
                 
-                // Also add script to ensure share menu is closed on page load
+                // Add script to ensure share menu is closed on page load
                 const extraScript = document.createElement('script');
                 extraScript.textContent = `
                     // Ensure share menu is closed when page loads
@@ -1829,6 +2009,21 @@
                 // Add this script to the document head
                 const head = docClone.querySelector('head');
                 head.appendChild(extraScript);
+                
+                // Ensure password protection works in the offline version
+                const passwordScript = document.createElement('script');
+                passwordScript.textContent = `
+                    // Reset authentication state for offline version to force password entry
+                    localStorage.removeItem('elTioGreenAuth');
+                    
+                    // Make sure password protection is initialized
+                    document.addEventListener('DOMContentLoaded', function() {
+                        if (typeof setupPasswordProtection === 'function') {
+                            setupPasswordProtection();
+                        }
+                    });
+                `;
+                docClone.querySelector('body').appendChild(passwordScript);
                 
                 // Remove the serverless function dependency
                 const scriptEl = docClone.querySelector('script');
@@ -1926,6 +2121,7 @@
         // Call the function to generate the menu - wait for DOM to be ready
         document.addEventListener('DOMContentLoaded', function() {
             generateMenuHTML();
+            setupPasswordProtection(); // Initialize password protection
         });
     </script>
 </body>
