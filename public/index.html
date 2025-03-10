@@ -856,20 +856,31 @@
         
         // Fetch data from our Netlify function
         let menuData; // Global menuData variable for download functionality
+        
         async function fetchMenuData() {
+            console.log("⏳ Attempting to fetch menu data...");
             try {
+                console.log("🔄 Starting fetch request to /api/get-menu");
                 const response = await fetch('/api/get-menu');
+                console.log("✅ Received response with status:", response.status);
+                
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    console.error("❌ Response not OK:", response.status, response.statusText);
+                    throw new Error('Network response was not ok: ' + response.status);
                 }
-                return await response.json();
+                
+                console.log("🔄 Parsing JSON response...");
+                const data = await response.json();
+                console.log("✅ JSON parsed successfully!");
+                return data;
             } catch (error) {
-                console.error('Error fetching menu data:', error);
+                console.error("❌ Error in fetchMenuData:", error);
                 // Show error to user
                 document.getElementById('menu-content').innerHTML = `
                     <div style="text-align: center; padding: 50px 20px;">
                         <h2>Error Loading Menu</h2>
                         <p>Sorry, we couldn't load the menu data. Please try again later.</p>
+                        <p style="color: #888; font-size: 0.8rem; margin: 15px 0;">Error details: ${error.message}</p>
                         <button onclick="location.reload()" style="
                             background-color: var(--accent);
                             color: black;
@@ -885,7 +896,6 @@
                 return null;
             }
         }
-        
         // IMPORTANT - This was missing in my previous answer
         function addEventListeners() {
             // Navigation functionality
