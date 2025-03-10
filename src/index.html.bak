@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="El Tío Green - Premium Cannabis Menu">
+    <meta property="og:description" content="View our premium cannabis collection with greenhouse, outdoor, hydroponic and indoor options.">
+    <meta property="og:type" content="website">
+    <title>El Tío Green - Premium Cannabis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik:wght@400;600;800&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #111;
+            --accent: #00c853;
+            --accent-dark: #009624;
+            --text: #f5f5f5;
+            --highlight: #69f0ae;
+            --card-bg: rgba(25, 25, 25, 0.85);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            font-family: 'Rubik', sans-serif;
+            background-image: url('/api/placeholder/1920/1080');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: -1;
+        }
+        
+        .main-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 15px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .logo {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-shadow: 3px 3px 0 #000, 
+                         5px 5px 0 rgba(0,0,0,0.5),
+                         -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                         -1px 1px 0 #000;
+            margin-bottom: 10px;
+            transform: rotate(-2deg);
+            display: inline-block;
+        }
+        
+        .tagline {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            transform: rotate(-1deg);
+            display: inline-block;
+            background-color: rgba(0,0,0,0.5);
+            padding: 3px 12px;
+            border-radius: 2px;
+        }
+        
+        /* Mobile navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background-color: rgba(0,0,0,0.8);
+            padding: 10px 0;
+            z-index: 100;
+            border-top: 2px solid var(--accent-dark);
+        }
+        
+        .mobile-nav-item {
+            text-align: center;
+            padding: 8px 0;
+            flex: 1;
+        }
+        
+        .mobile-nav-icon {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 0.7rem;
+            color: var(--text);
+            display: block;
+            margin-bottom: 4px;
+            opacity: 0.8;
+        }
+        
+        .mobile-nav-text {
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+        
+        .mobile-nav-item.active .mobile-nav-icon,
+        .mobile-nav-item.active .mobile-nav-text {
+            color: var(--accent);
+            opacity: 1;
+        }
+        
+        /* Section design */
+        .page-section {
+            min-height: 100vh;
+            padding: 20px 15px 100px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .page-section::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo-placeholder {
+            width: 70px;
+            height: 70px;
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Permanent Marker', cursive;
+            color: var(--accent);
+            background-color: rgba(0,0,0,0.5);
+            transform: rotate(-3deg);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+        
+        .section-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 5px;
+            transform: rotate(-2deg);
+            display: inline-block;
+        }
+        
+        .section-subtitle {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            transform: rotate(-1deg);
+        }
+        
+        /* Pricing tags - mobile optimized */
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 0 10px;
+        }
+        
+        .pricing-tag {
+            background-color: var(--accent);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 0.8rem;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            transform: rotate(var(--r, -2deg));
+            position: relative;
+            margin-bottom: 5px;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .pricing-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent 60%);
+            border-radius: 5px;
+        }
+        
+        .price-value {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .pricing-header {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+            transform: rotate(-1deg);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        /* Mobile-friendly strain cards */
+        .mobile-strain-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .mobile-strain-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            padding: 0;
+            position: relative;
+            transform: rotate(var(--r, 0deg));
+        }
+        
+        .mobile-strain-card:nth-child(odd) {
+            --r: 1deg;
+        }
+        
+        .mobile-strain-card:nth-child(even) {
+            --r: -1deg;
+        }
+        
+        .mobile-strain-card:active {
+            transform: scale(0.98) rotate(var(--r, 0deg));
+        }
+        
+        .mobile-strain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,200,83,0.1), transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .mobile-strain-content {
+            flex: 1;
+            padding: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mobile-strain-image {
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .mobile-strain-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .mobile-strain-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3rem;
+            color: var(--highlight);
+            margin-bottom: 3px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mobile-strain-type {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Category sections */
+        .category-section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .category-section:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 15%;
+            width: 70%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+        
+        .category-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            display: inline-block;
+            position: relative;
+            transform: rotate(-1deg);
+            margin-left: 20px;
+        }
+        
+        .category-title::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            width: 5px;
+            height: 60%;
+            transform: translateY(-50%);
+            background-color: var(--accent);
+            border-radius: 3px;
+        }
+        
+        /* Donas Section Design - Mobile Optimized */
+        .donas-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .donas-item {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            transform: rotate(var(--r, 0deg));
+        }
+        
+        .donas-item:nth-child(1) {
+            --r: 1deg;
+        }
+        
+        .donas-item:nth-child(2) {
+            --r: -1deg;
+        }
+        
+        .donas-item:nth-child(3) {
+            --r: 0.5deg;
+        }
+        
+        .donas-item:nth-child(4) {
+            --r: -0.5deg;
+        }
+        
+        .donas-item:active {
+            transform: scale(0.98) rotate(var(--r, 0deg));
+        }
+        
+        .donas-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            background-color: rgba(0,0,0,0.3);
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .donas-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .donas-details {
+            flex: 1;
+        }
+        
+        .donas-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3rem;
+            color: var(--highlight);
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .donas-desc {
+            font-family: 'Shadows Into Light', cursive;
+            margin-bottom: 10px;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .donas-price {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1rem;
+            color: var(--highlight);
+            background-color: rgba(0,0,0,0.5);
+            padding: 2px 10px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            transform: rotate(-1deg);
+        }
+        
+        /* Urban graffiti elements */
+        .graf-elem {
+            position: absolute;
+            font-family: 'Permanent Marker', cursive;
+            opacity: 0.05;
+            color: var(--accent);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .big-graf {
+            font-size: 8rem;
+            transform: rotate(var(--r, 15deg));
+        }
+        
+        .med-graf {
+            font-size: 5rem;
+            transform: rotate(var(--r, -15deg));
+        }
+        
+        .g1 {
+            top: 10%;
+            right: -5%;
+            --r: 15deg;
+        }
+        
+        .g2 {
+            bottom: 5%;
+            left: -5%;
+            --r: -12deg;
+        }
+        
+        .g3 {
+            top: 30%;
+            left: -10%;
+            --r: 10deg;
+        }
+        
+        .splatter {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .s1 {
+            top: 20%;
+            left: 10%;
+            background-color: var(--accent);
+        }
+        
+        .s2 {
+            bottom: 30%;
+            right: 15%;
+            background-color: var(--highlight);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 70px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            opacity: 0.7;
+            animation: fadeInOut 2s infinite;
+        }
+        
+        .scroll-arrow {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .scroll-text {
+            font-size: 0.7rem;
+            font-family: 'Shadows Into Light', cursive;
+        }
+        
+        /* Share button styles */
+        .share-button {
+            position: fixed;
+            bottom: 70px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+        
+        .share-menu {
+            position: fixed;
+            bottom: 125px;
+            left: 15px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: none;
+            border: 1px solid var(--accent-dark);
+        }
+        
+        .share-menu.visible {
+            display: block;
+        }
+        
+        .share-option {
+            padding: 8px 12px;
+            display: block;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            background-color: rgba(0,0,0,0.2);
+        }
+        
+        .share-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .share-option:active {
+            background-color: var(--accent-dark);
+        }
+        
+        /* Loading modal */
+        .loading-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-modal.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-family: 'Shadows Into Light', cursive;
+            color: var(--text);
+            font-size: 1.2rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.7; transform: translateX(-50%) translateY(5px); }
+        }
+        
+        /* Default background color */
+        .bg-fallback {
+            background-color: #121212;
+        }
+        
+        /* For larger screens */
+        @media (min-width: 768px) {
+            .main-container {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            
+            .mobile-strain-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+            
+            .mobile-strain-card {
+                height: 100%;
+            }
+            
+            .mobile-strain-image {
+                width: 120px;
+                height: auto;
+            }
+            
+            .section-title {
+                font-size: 3.5rem;
+            }
+            
+            .donas-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 30px;
+            }
+            
+            .donas-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .mobile-nav {
+                display: none;
+            }
+            
+            .page-section {
+                padding: 40px 20px 60px;
+            }
+            
+            /* Desktop navigation */
+            .desktop-nav {
+                position: fixed;
+                top: 50%;
+                right: 20px;
+                transform: translateY(-50%);
+                z-index: 100;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .desktop-nav-item {
+                width: 12px;
+                height: 12px;
+                background-color: rgba(0,0,0,0.3);
+                border: 2px solid var(--accent);
+                border-radius: 50%;
+                margin: 10px 0;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .desktop-nav-item:hover,
+            .desktop-nav-item.active {
+                background-color: var(--accent);
+                transform: scale(1.3);
+            }
+        }
+    </style>
+</head>
+<body class="bg-fallback">
+    <!-- Desktop navigation (visible on larger screens) -->
+    <div class="desktop-nav" id="desktop-nav"></div>
+    
+    <!-- Mobile navigation (visible on smaller screens) -->
+    <div class="mobile-nav" id="mobile-nav"></div>
+    
+    <div class="back-to-top">?</div>
+    
+    <div class="share-button">??</div>
+    <div class="share-menu">
+        <a href="#" class="share-option" id="share-whatsapp">?? WhatsApp</a>
+        <a href="#" class="share-option" id="copy-link">?? Copy Link</a>
+    </div>
+    
+    <div class="loading-modal" id="loading-modal">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading menu data...</div>
+    </div>
+    
+    <header>
+        <div class="logo">El Tío Green</div>
+        <div class="tagline">Premium Cannabis Collection</div>
+    </header>
+    
+    <div class="main-container" id="menu-content"></div>
+    
+    <script>
+        // Show loading modal at start
+        document.getElementById('loading-modal').classList.add('visible');
+        
+        // Fetch data from our Netlify function
+        async function fetchMenuData() {
+            try {
+                const response = await fetch('/api/get-menu');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching menu data:', error);
+                // Show error to user
+                document.getElementById('menu-content').innerHTML = `
+                    <div style="text-align: center; padding: 50px 20px;">
+                        <h2>Error Loading Menu</h2>
+                        <p>Sorry, we couldn't load the menu data. Please try again later.</p>
+                        <button onclick="location.reload()" style="
+                            background-color: var(--accent);
+                            color: black;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 5px;
+                            margin-top: 20px;
+                            cursor: pointer;
+                        ">Retry</button>
+                    </div>
+                `;
+                document.getElementById('loading-modal').classList.remove('visible');
+                return null;
+            }
+        }
+        
+        // Function to generate the menu HTML from the data
+        async function generateMenuHTML() {
+            const menuData = await fetchMenuData();
+            if (!menuData) return;
+            
+            const container = document.getElementById('menu-content');
+            container.innerHTML = ''; // Clear existing content
+            
+            // Generate desktop navigation
+            const desktopNav = document.getElementById('desktop-nav');
+            desktopNav.innerHTML = '';
+            
+            // Generate mobile navigation
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.innerHTML = '';
+            
+            // Generate each section
+            menuData.sections.forEach((section, index) => {
+                // Add navigation items
+                const desktopNavItem = document.createElement('div');
+                desktopNavItem.className = 'desktop-nav-item' + (index === 0 ? ' active' : '');
+                desktopNavItem.setAttribute('data-section', section.id);
+                desktopNav.appendChild(desktopNavItem);
+                
+                const mobileNavItem = document.createElement('div');
+                mobileNavItem.className = 'mobile-nav-item' + (index === 0 ? ' active' : '');
+                mobileNavItem.setAttribute('data-section', section.id);
+                mobileNavItem.innerHTML = `
+                    <span class="mobile-nav-icon">${section.icon}</span>
+                    <span class="mobile-nav-text">${section.title.split(' ')[0].substring(0, 4)}</span>
+                `;
+                mobileNav.appendChild(mobileNavItem);
+                
+                // Create section element
+                const sectionEl = document.createElement('section');
+                sectionEl.className = 'page-section';
+                sectionEl.id = section.id;
+                
+                // Add graffiti elements
+                const graffitiBg = document.createElement('div');
+                graffitiBg.className = `graf-elem big-graf g${(index % 3) + 1}`;
+                graffitiBg.textContent = section.title.split(' ')[0].toUpperCase();
+                sectionEl.appendChild(graffitiBg);
+                
+                const splatter = document.createElement('div');
+                splatter.className = `splatter s${(index % 2) + 1}`;
+                sectionEl.appendChild(splatter);
+                
+                // Section header
+                const headerEl = document.createElement('div');
+                headerEl.className = 'section-header';
+                
+                const logoContainer = document.createElement('div');
+                logoContainer.className = 'logo-container';
+                
+                const logoPlaceholder = document.createElement('div');
+                logoPlaceholder.className = 'logo-placeholder';
+                logoPlaceholder.textContent = 'LOGO';
+                logoContainer.appendChild(logoPlaceholder);
+                headerEl.appendChild(logoContainer);
+                
+                const titleEl = document.createElement('h2');
+                titleEl.className = 'section-title';
+                titleEl.textContent = section.title;
+                headerEl.appendChild(titleEl);
+                
+                const subtitleEl = document.createElement('p');
+                subtitleEl.className = 'section-subtitle';
+                subtitleEl.textContent = section.subtitle;
+                headerEl.appendChild(subtitleEl);
+                
+                sectionEl.appendChild(headerEl);
+                
+                // If the section has categories (like Pods and Extracts)
+                if (section.categories) {
+                    section.categories.forEach(category => {
+                        const categorySection = document.createElement('div');
+                        categorySection.className = 'category-section';
+                        
+                        const categoryTitle = document.createElement('h3');
+                        categoryTitle.className = 'category-title';
+                        categoryTitle.textContent = category.title;
+                        categorySection.appendChild(categoryTitle);
+                        
+                        // Prices
+                        const pricingHeader = document.createElement('div');
+                        pricingHeader.className = 'pricing-header';
+                        pricingHeader.textContent = 'Pricing';
+                        categorySection.appendChild(pricingHeader);
+                        
+                        const pricingContainer = document.createElement('div');
+                        pricingContainer.className = 'pricing-container';
+                        
+                        category.prices.forEach((price, i) => {
+                            const pricingTag = document.createElement('div');
+                            pricingTag.className = 'pricing-tag';
+                            pricingTag.style.setProperty('--r', `${(i % 3 - 1) * 1.5}deg`);
+                            
+                            pricingTag.innerHTML = `${price.weight} <span class="price-value">${price.price}</span>`;
+                            pricingContainer.appendChild(pricingTag);
+                        });
+                        
+                        categorySection.appendChild(pricingContainer);
+                        
+                        // Products
+                        const productList = document.createElement('div');
+                        productList.className = 'mobile-strain-list';
+                        
+                        category.products.forEach(product => {
+                            const productCard = document.createElement('div');
+                            productCard.className = 'mobile-strain-card';
+                            
+                            const contentEl = document.createElement('div');
+                            contentEl.className = 'mobile-strain-content';
+                            
+                            const nameEl = document.createElement('h3');
+                            nameEl.className = 'mobile-strain-name';
+                            nameEl.textContent = product.name;
+                            contentEl.appendChild(nameEl);
+                            
+                            const typeEl = document.createElement('p');
+                            typeEl.className = 'mobile-strain-type';
+                            typeEl.textContent = product.type;
+                            contentEl.appendChild(typeEl);
+                            
+                            productCard.appendChild(contentEl);
+                            
+                            const imageEl = document.createElement('div');
+                            imageEl.className = 'mobile-strain-image';
+                            
+                            const img = document.createElement('img');
+                            img.src = product.imageUrl || menuData.defaultImages.concentrate;
+                            img.alt = product.name;
+                            // Add error handler to use default image if this one fails
+                            img.onerror = function() {
+                                this.src = menuData.defaultImages.concentrate;
+                            };
+                            imageEl.appendChild(img);
+                            
+                            productCard.appendChild(imageEl);
+                            productList.appendChild(productCard);
+                        });
+                        
+                        categorySection.appendChild(productList);
+                        sectionEl.appendChild(categorySection);
+                    });
+                } 
+                // For donas section (special products)
+                else if (section.specialProducts) {
+                    const donasContainer = document.createElement('div');
+                    donasContainer.className = 'donas-container';
+                    
+                    section.specialProducts.forEach(product => {
+                        const donasItem = document.createElement('div');
+                        donasItem.className = 'donas-item';
+                        
+                        const imageEl = document.createElement('div');
+                        imageEl.className = 'donas-image';
+                        
+                        const img = document.createElement('img');
+                        img.src = product.imageUrl || menuData.defaultImages.edible;
+                        img.alt = product.name;
+                        // Add error handler to use default image if this one fails
+                        img.onerror = function() {
+                            this.src = menuData.defaultImages.edible;
+                        };
+                        imageEl.appendChild(img);
+                        
+                        donasItem.appendChild(imageEl);
+                        
+                        const detailsEl = document.createElement('div');
+                        detailsEl.className = 'donas-details';
+                        
+                        const nameEl = document.createElement('h3');
+                        nameEl.className = 'donas-name';
+                        nameEl.textContent = product.name;
+                        detailsEl.appendChild(nameEl);
+                        
+                        const descEl = document.createElement('p');
+                        descEl.className = 'donas-desc';
+                        descEl.textContent = product.description;
+                        detailsEl.appendChild(descEl);
+                        
+                        // If we have multiple prices
+                        if (product.prices) {
+                            const pricesDiv = document.createElement('div');
+                            
+                            product.prices.forEach(price => {
+                                const priceEl = document.createElement('span');
+                                priceEl.className = 'donas-price';
+                                priceEl.textContent = `${price.quantity}: ${price.price}`;
+                                pricesDiv.appendChild(priceEl);
+                            });
+                            
+                            detailsEl.appendChild(pricesDiv);
+                        } else {
+                            const priceEl = document.createElement('div');
+                            priceEl.className = 'donas-price';
+                            priceEl.textContent = product.price;
+                            detailsEl.appendChild(priceEl);
+                        }
+                        
+                        donasItem.appendChild(detailsEl);
+                        donasContainer.appendChild(donasItem);
+                    });
+                    
+                    sectionEl.appendChild(donasContainer);
+                }
+                // Regular sections with prices and products
+                else {
+                    // Prices
+                    if (section.prices && section.prices.length > 0) {
+                        const pricingHeader = document.createElement('div');
+                        pricingHeader.className = 'pricing-header';
+                        pricingHeader.textContent = 'Pricing';
+                        sectionEl.appendChild(pricingHeader);
+                        
+                        const pricingContainer = document.createElement('div');
+                        pricingContainer.className = 'pricing-container';
+                        
+                        section.prices.forEach((price, i) => {
+                            const pricingTag = document.createElement('div');
+                            pricingTag.className = 'pricing-tag';
+                            pricingTag.style.setProperty('--r', `${(i % 3 - 1) * 1.5}deg`);
+                            
+                            pricingTag.innerHTML = `${price.weight} <span class="price-value">${price.price}</span>`;
+                            pricingContainer.appendChild(pricingTag);
+                        });
+                        
+                        sectionEl.appendChild(pricingContainer);
+                    }
+                    
+                    // Products
+                    if (section.products && section.products.length > 0) {
+                        const productList = document.createElement('div');
+                        productList.className = 'mobile-strain-list';
+                        
+                        section.products.forEach(product => {
+                            const productCard = document.createElement('div');
+                            productCard.className = 'mobile-strain-card';
+                            
+                            const contentEl = document.createElement('div');
+                            contentEl.className = 'mobile-strain-content';
+                            
+                            const nameEl = document.createElement('h3');
+                            nameEl.className = 'mobile-strain-name';
+                            nameEl.textContent = product.name;
+                            contentEl.appendChild(nameEl);
+                            
+                            const typeEl = document.createElement('p');
+                            typeEl.className = 'mobile-strain-type';
+                            typeEl.textContent = product.type;
+                            contentEl.appendChild(typeEl);
+                            
+                            productCard.appendChild(contentEl);
+                            
+                            const imageEl = document.createElement('div');
+                            imageEl.className = 'mobile-strain-image';
+                            
+                            const img = document.createElement('img');
+                            img.src = product.imageUrl || menuData.defaultImages.flower;
+                            img.alt = product.name;
+                            // Add error handler to use default image if this one fails
+                            img.onerror = function() {
+                                this.src = menuData.defaultImages.flower;
+                            };
+                            imageEl.appendChild(img);
+                            
+                            productCard.appendChild(imageEl);
+                            productList.appendChild(productCard);
+                        });
+                        
+                        sectionEl.appendChild(productList);
+                    }
+                }
+                
+                // Add scroll indicator only to first section
+                if (index === 0) {
+                    const scrollIndicator = document.createElement('div');
+                    scrollIndicator.className = 'scroll-indicator';
+                    
+                    const scrollArrow = document.createElement('div');
+                    scrollArrow.className = 'scroll-arrow';
+                    scrollArrow.textContent = '?';
+                    scrollIndicator.appendChild(scrollArrow);
+                    
+                    const scrollText = document.createElement('div');
+                    scrollText.className = 'scroll-text';
+                    scrollText.textContent = 'Scroll down';
+                    scrollIndicator.appendChild(scrollText);
+                    
+                    sectionEl.appendChild(scrollIndicator);
+                }
+                
+                container.appendChild(sectionEl);
+            });
+            
+            // Hide loading modal
+            document.getElementById('loading-modal').classList.remove('visible');
+            
+            // Add event listeners
+            addEventListeners();
+        }
+        
+        function addEventListeners() {
+            // Navigation functionality
+            document.querySelectorAll('.mobile-nav-item, .desktop-nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    document.getElementById(section).scrollIntoView({behavior: 'smooth'});
+                    
+                    // Update active state for mobile nav
+                    document.querySelectorAll('.mobile-nav-item').forEach(i => {
+                        i.classList.remove('active');
+                    });
+                    document.querySelectorAll('.mobile-nav-item[data-section="' + section + '"]').forEach(i => {
+                        i.classList.add('active');
+                    });
+                    
+                    // Update active state for desktop nav
+                    document.querySelectorAll('.desktop-nav-item').forEach(i => {
+                        i.classList.remove('active');
+                    });
+                    document.querySelectorAll('.desktop-nav-item[data-section="' + section + '"]').forEach(i => {
+                        i.classList.add('active');
+                    });
+                });
+            });
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+            
+            // Share button functionality
+            const shareButton = document.querySelector('.share-button');
+            const shareMenu = document.querySelector('.share-menu');
+            
+            shareButton.addEventListener('click', function() {
+                shareMenu.classList.toggle('visible');
+            });
+            
+            // Hide share menu when clicking elsewhere
+            document.addEventListener('click', function(event) {
+                if (!shareButton.contains(event.target) && !shareMenu.contains(event.target)) {
+                    shareMenu.classList.remove('visible');
+                }
+            });
+            
+            // WhatsApp sharing
+            document.getElementById('share-whatsapp').addEventListener('click', function(e) {
+                e.preventDefault();
+                const message = encodeURIComponent("Check out El Tío Green's premium cannabis menu:");
+                const url = encodeURIComponent(window.location.href);
+                window.open(`https://wa.me/?text=${message} ${url}`, '_blank');
+                shareMenu.classList.remove('visible');
+            });
+            
+            // Copy link functionality
+            document.getElementById('copy-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = window.location.href;
+                
+                // Use the newer navigator.clipboard API if available
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url)
+                        .then(() => {
+                            alert('Link copied to clipboard!');
+                        })
+                        .catch(err => {
+                            console.error('Could not copy text: ', err);
+                        });
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = url;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    
+                    try {
+                        const successful = document.execCommand('copy');
+                        if (successful) {
+                            alert('Link copied to clipboard!');
+                        } else {
+                            console.error('Unable to copy');
+                        }
+                    } catch (err) {
+                        console.error('Error copying text: ', err);
+                    }
+                    
+                    document.body.removeChild(textArea);
+                }
+                
+                shareMenu.classList.remove('visible');
+            });
+            
+            // Scroll event to show/hide back to top button and update active nav
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+                
+                // Update active nav based on scroll position
+                const sections = document.querySelectorAll('.page-section');
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.scrollY >= sectionTop - 200 && window.scrollY < sectionTop + sectionHeight - 200) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                if (currentSection) {
+                    // Update mobile nav
+                    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.querySelector('.mobile-nav-item[data-section="' + currentSection + '"]').classList.add('active');
+                    
+                    // Update desktop nav
+                    document.querySelectorAll('.desktop-nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.querySelector('.desktop-nav-item[data-section="' + currentSection + '"]').classList.add('active');
+                }
+            });
+        }
+        
+        // Call the function to generate the menu
+        generateMenuHTML();
+    </script>
+</body>
+</html>
