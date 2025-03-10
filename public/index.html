@@ -75,6 +75,7 @@
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
         
+        /* MODIFIED: Increased logo size */
         .logo {
             font-family: 'Permanent Marker', cursive;
             font-size: 4.5rem;
@@ -103,7 +104,7 @@
             border-radius: 2px;
         }
         
-        /* Mobile navigation */
+        /* MODIFIED: Fixed mobile navigation issues */
         .mobile-nav {
             position: fixed;
             bottom: 0;
@@ -112,20 +113,20 @@
             display: flex;
             justify-content: space-around;
             background-color: rgba(0,0,0,0.8);
-            padding: 12px 0 10px; /* Increased top padding */
+            padding: 12px 0 10px;
             z-index: 100;
             border-top: 2px solid var(--accent-dark);
-            height: auto; /* Ensure height is automatic */
+            height: auto;
         }
         
         .mobile-nav-item {
             text-align: center;
-            padding: 8px 0 10px; /* Increased bottom padding */
-            flex: 1;
+            padding: 8px 0 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            flex: 1;
             height: 100%;
         }
         
@@ -139,12 +140,12 @@
         }
         
         .mobile-nav-text {
-            font-size: 0.7rem; /* Slightly larger text */
-            line-height: 1.2; /* Added line height */
-            white-space: nowrap; /* Prevent wrapping */
-            overflow: visible; /* Allow text to be fully visible */
-            max-width: 100%; /* Ensure text doesn't overflow container */
+            font-size: 0.7rem;
+            line-height: 1.2;
             opacity: 0.7;
+            white-space: nowrap;
+            overflow: visible;
+            max-width: 100%;
         }
         
         .mobile-nav-item.active .mobile-nav-icon,
@@ -184,6 +185,7 @@
             margin-bottom: 15px;
         }
         
+        /* MODIFIED: Bigger logo placeholders, no border */
         .logo-placeholder {
             width: 90px;
             height: 90px;
@@ -422,6 +424,7 @@
             align-items: center;
             transition: all 0.2s ease;
             transform: rotate(var(--r, 0deg));
+            position: relative;
         }
         
         .donas-item:nth-child(1) {
@@ -694,6 +697,160 @@
             font-size: 1.2rem;
         }
         
+        /* NEW: Product selection modal styles */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-modal.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .product-modal-content {
+            background-color: var(--card-bg);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .product-modal.visible .product-modal-content {
+            transform: scale(1);
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            color: var(--text);
+            cursor: pointer;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .product-modal-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-modal-details {
+            padding: 20px;
+        }
+
+        .modal-product-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2rem;
+            color: var(--highlight);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-product-type {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .modal-product-description {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.9;
+        }
+        
+        /* NEW: Product view button styles */
+        .product-view-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: black;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .product-view-button span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Make the card position relative so the button position works */
+        .mobile-strain-card,
+        .donas-item {
+            position: relative;
+        }
+
+        /* Show the view button on hover/touch for desktop */
+        @media (min-width: 768px) {
+            .mobile-strain-card:hover .product-view-button,
+            .donas-item:hover .product-view-button {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* For mobile, always show the view button */
+        @media (max-width: 767px) {
+            .product-view-button {
+                opacity: 0.8;
+                transform: translateY(0);
+            }
+            
+            /* Pulse animation to draw attention */
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            
+            .product-view-button {
+                animation: pulse 2s infinite;
+            }
+        }
+        
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
@@ -782,6 +939,8 @@
                 background-color: var(--accent);
                 transform: scale(1.3);
             }
+            
+            /* MODIFIED: Larger logo size for desktop */
             .logo {
                 font-size: 5.5rem;
             }
@@ -790,6 +949,23 @@
             .logo-placeholder {
                 width: 120px;
                 height: 120px;
+            }
+            
+            /* MODIFIED: Product modal for larger screens */
+            .product-modal-content {
+                width: 70%;
+                max-width: 700px;
+                display: flex;
+            }
+            
+            .product-modal-image {
+                width: 50%;
+                height: auto;
+            }
+            
+            .product-modal-details {
+                width: 50%;
+                padding: 30px;
             }
         }
     </style>
@@ -819,6 +995,23 @@
     <div class="loading-modal" id="download-modal">
         <div class="loading-spinner"></div>
         <div class="loading-text">Creando versión offline...</div>
+    </div>
+    
+    <!-- NEW: Product modal -->
+    <div id="product-modal" class="product-modal">
+        <div class="product-modal-content">
+            <div class="product-modal-close">&times;</div>
+            <div class="product-modal-image">
+                <img id="modal-product-image" src="" alt="Product">
+            </div>
+            <div class="product-modal-details">
+                <h2 id="modal-product-name" class="modal-product-name"></h2>
+                <p id="modal-product-type" class="modal-product-type"></p>
+                <div id="modal-product-description" class="modal-product-description">
+                    <!-- Description will be added here later -->
+                </div>
+            </div>
+        </div>
     </div>
     
     <header>
@@ -886,7 +1079,7 @@
             }
         }
         
-        // IMPORTANT - This was missing in my previous answer
+        // MODIFIED: Enhanced addEventListeners function with product selection support
         function addEventListeners() {
             // Navigation functionality
             document.querySelectorAll('.mobile-nav-item, .desktop-nav-item').forEach(item => {
@@ -986,123 +1179,8 @@
                 shareMenu.classList.remove('visible');
             });
             
-            // Downlaod menu function
-            document.getElementById('download-menu').addEventListener('click', async function(e) {
-                e.preventDefault();
-                
-                // Show download modal
-                const downloadModal = document.getElementById('download-modal');
-                downloadModal.classList.add('visible');
-                
-                try {
-                    // Create a copy of the current document
-                    const docClone = document.documentElement.cloneNode(true);
-                    
-                    // IMPORTANT FIX: Close the share menu in the downloaded version
-                    // Find and remove the 'visible' class from any share-menu elements
-                    const shareMenus = docClone.querySelectorAll('.share-menu');
-                    shareMenus.forEach(menu => {
-                        menu.classList.remove('visible');
-                    });
-                    
-                    // Also add script to ensure share menu is closed on page load
-                    const extraScript = document.createElement('script');
-                    extraScript.textContent = `
-                        // Ensure share menu is closed when page loads
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const shareMenus = document.querySelectorAll('.share-menu');
-                            shareMenus.forEach(menu => {
-                                menu.classList.remove('visible');
-                            });
-                        });
-                    `;
-                    
-                    // Add this script to the document head
-                    const head = docClone.querySelector('head');
-                    head.appendChild(extraScript);
-                    
-                    // Remove the serverless function dependency
-                    const scriptEl = docClone.querySelector('script');
-                    scriptEl.textContent = scriptEl.textContent.replace(/const response = await fetch\('\/api\/get-menu'\);[^}]*}catch\(error\){[^}]*}/, `
-                        // This is an offline version with embedded data
-                        return ${JSON.stringify(menuData)};
-                    `);
-                    
-                    // Find all images in the clone
-                    const images = docClone.querySelectorAll('img');
-                    
-                    // Convert all images to data URLs
-                    for (const img of images) {
-                        try {
-                            if (img.src && !img.src.startsWith('data:')) {
-                                const response = await fetch(img.src);
-                                const blob = await response.blob();
-                                const reader = new FileReader();
-                                
-                                await new Promise((resolve) => {
-                                    reader.onloadend = function() {
-                                        img.src = reader.result;
-                                        resolve();
-                                    };
-                                    reader.readAsDataURL(blob);
-                                });
-                            }
-                        } catch (err) {
-                            console.warn('Could not convert image:', err);
-                            // Create a colored placeholder
-                            const canvas = document.createElement('canvas');
-                            canvas.width = 80;
-                            canvas.height = 80;
-                            const ctx = canvas.getContext('2d');
-                            ctx.fillStyle = '#00c853';
-                            ctx.fillRect(0, 0, 80, 80);
-                            img.src = canvas.toDataURL('image/png');
-                        }
-                    }
-                    
-                    // Update background image
-                    const style = document.createElement('style');
-                    style.textContent = `
-                        body {
-                            background-image: none !important;
-                            background-color: #121212 !important;
-                        }
-                    `;
-                    
-                    // Append the style to head
-                    head.appendChild(style);
-                    
-                    // Remove loading modals from the clone
-                    const modals = docClone.querySelectorAll('.loading-modal');
-                    if (modals) {
-                        modals.forEach(modal => modal.remove());
-                    }
-                    
-                    // Get the HTML content from the modified clone
-                    const htmlContent = '<!DOCTYPE html>\n' + docClone.outerHTML;
-                    
-                    // Create a blob from the HTML content
-                    const blob = new Blob([htmlContent], { type: 'text/html' });
-                    
-                    // Create a temporary link for downloading
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = 'el-tio-green-menu.html';
-                    link.click();
-                    
-                    // Clean up
-                    URL.revokeObjectURL(link.href);
-                    
-                } catch (error) {
-                    console.error('Error creating offline version:', error);
-                    alert('Hubo un error al crear la versión offline. Por favor intenta de nuevo.');
-                } finally {
-                    // Hide loading modal
-                    downloadModal.classList.remove('visible');
-                    // Close share menu
-                    document.querySelector('.share-menu').classList.remove('visible');
-                }
-            });
+            // NEW: Setup product card listeners
+            setupProductCardListeners();
             
             // Optimized scroll handler with throttling
             const optimizedScrollHandler = throttle(function() {
@@ -1144,6 +1222,174 @@
             
             // Use the optimized scroll handler
             window.addEventListener('scroll', optimizedScrollHandler);
+        }
+        
+        // NEW: Function to show the product modal
+        function showProductModal(product) {
+            const modal = document.getElementById('product-modal');
+            const modalImage = document.getElementById('modal-product-image');
+            const modalName = document.getElementById('modal-product-name');
+            const modalType = document.getElementById('modal-product-type');
+            const modalDescription = document.getElementById('modal-product-description');
+            
+            // Set the product details
+            modalName.textContent = product.name || 'Product';
+            modalType.textContent = product.type || '';
+            
+            // Set image with fallback
+            if (product.imageUrl) {
+                modalImage.src = product.imageUrl;
+            } else {
+                // Use appropriate default image based on section/category
+                if (product.productType === 'concentrate') {
+                    modalImage.src = menuData.defaultImages?.concentrate || '';
+                } else if (product.productType === 'edible') {
+                    modalImage.src = menuData.defaultImages?.edible || '';
+                } else {
+                    modalImage.src = menuData.defaultImages?.flower || '';
+                }
+            }
+            
+            // Handle image error
+            modalImage.onerror = function() {
+                this.src = menuData.defaultImages?.flower || '';
+            };
+            
+            // Clear any existing description (for future use)
+            modalDescription.innerHTML = '';
+            
+            // For now, add a placeholder description if none exists
+            if (!product.description) {
+                modalDescription.innerHTML = '<p>Product details coming soon.</p>';
+            } else {
+                modalDescription.innerHTML = `<p>${product.description}</p>`;
+            }
+            
+            // Show the modal
+            modal.classList.add('visible');
+            
+            // Prevent scrolling on the body when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // NEW: Function to close the product modal
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('visible');
+            
+            // Re-enable scrolling
+            document.body.style.overflow = '';
+        }
+
+        // NEW: Function to handle product selection
+        function handleProductSelection(card, index) {
+            // Get section and product index
+            const section = card.closest('.page-section');
+            const sectionId = section.id;
+            
+            // Find the corresponding product in menuData
+            let product = null;
+            
+            // Search in the appropriate section
+            menuData.sections.forEach(sectionData => {
+                if (sectionData.id === sectionId) {
+                    // If it's a regular section with products
+                    if (sectionData.products && card.classList.contains('mobile-strain-card')) {
+                        // Find the index within this section
+                        const sectionCards = section.querySelectorAll('.mobile-strain-card');
+                        const localIndex = Array.from(sectionCards).indexOf(card);
+                        
+                        if (localIndex !== -1 && sectionData.products[localIndex]) {
+                            product = sectionData.products[localIndex];
+                            if (product) product.productType = 'flower';
+                        }
+                    }
+                    // If it's a section with special products (donas)
+                    else if (sectionData.specialProducts && card.classList.contains('donas-item')) {
+                        // Find the index within this section
+                        const sectionCards = section.querySelectorAll('.donas-item');
+                        const localIndex = Array.from(sectionCards).indexOf(card);
+                        
+                        if (localIndex !== -1 && sectionData.specialProducts[localIndex]) {
+                            product = sectionData.specialProducts[localIndex];
+                            if (product) product.productType = 'edible';
+                        }
+                    }
+                    // If it's a category-based section
+                    else if (sectionData.categories) {
+                        // Find the category container
+                        const categorySection = card.closest('.category-section');
+                        if (categorySection) {
+                            // Find all cards in this category
+                            const categorySectionCards = categorySection.querySelectorAll('.mobile-strain-card');
+                            const localIndex = Array.from(categorySectionCards).indexOf(card);
+                            
+                            // Find the matching category in the data
+                            const categoryTitle = categorySection.querySelector('.category-title')?.textContent;
+                            
+                            if (categoryTitle) {
+                                const category = sectionData.categories.find(cat => 
+                                    cat.title === categoryTitle || 
+                                    cat.title?.includes(categoryTitle) || 
+                                    categoryTitle.includes(cat.title)
+                                );
+                                
+                                if (category && category.products && localIndex !== -1 && category.products[localIndex]) {
+                                    product = category.products[localIndex];
+                                    if (product) product.productType = 'concentrate';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // If we found a product, show it in the modal
+            if (product) {
+                showProductModal(product);
+            }
+        }
+
+        // NEW: Function to set up event listeners for product cards
+        function setupProductCardListeners() {
+            // Find all product cards
+            const productCards = document.querySelectorAll('.mobile-strain-card, .donas-item');
+            
+            productCards.forEach((card, index) => {
+                // For the double-click method (desktop friendly)
+                card.addEventListener('dblclick', function() {
+                    handleProductSelection(card, index);
+                });
+                
+                // Add a view button for mobile users (appears on touch/hover)
+                const viewButton = document.createElement('div');
+                viewButton.className = 'product-view-button';
+                viewButton.innerHTML = '<span>👁️ View</span>';
+                card.appendChild(viewButton);
+                
+                // Click handler for the view button
+                viewButton.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent triggering card click
+                    handleProductSelection(card, index);
+                });
+            });
+            
+            // Add click listener to close button
+            document.querySelector('.product-modal-close').addEventListener('click', closeProductModal);
+            
+            // Close modal when clicking outside the content
+            document.getElementById('product-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeProductModal();
+                }
+            });
+            
+            // Close modal with escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('product-modal').classList.contains('visible')) {
+                    closeProductModal();
+                }
+            });
         }
         
         // Function to generate the menu HTML from the data
@@ -1526,6 +1772,134 @@
                 `;
             }
         }
+        
+        // MODIFIED: Fixed download menu functionality to ensure share menu is closed in downloaded file
+        document.getElementById('download-menu').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            // Show download modal
+            const downloadModal = document.getElementById('download-modal');
+            downloadModal.classList.add('visible');
+            
+            try {
+                // Create a copy of the current document
+                const docClone = document.documentElement.cloneNode(true);
+                
+                // IMPORTANT FIX: Close the share menu in the downloaded version
+                // Find and remove the 'visible' class from any share-menu elements
+                const shareMenus = docClone.querySelectorAll('.share-menu');
+                shareMenus.forEach(menu => {
+                    menu.classList.remove('visible');
+                });
+                
+                // Also add script to ensure share menu is closed on page load
+                const extraScript = document.createElement('script');
+                extraScript.textContent = `
+                    // Ensure share menu is closed when page loads
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const shareMenus = document.querySelectorAll('.share-menu');
+                        shareMenus.forEach(menu => {
+                            menu.classList.remove('visible');
+                        });
+                    });
+                `;
+                
+                // Add this script to the document head
+                const head = docClone.querySelector('head');
+                head.appendChild(extraScript);
+                
+                // Remove the serverless function dependency
+                const scriptEl = docClone.querySelector('script');
+                scriptEl.textContent = scriptEl.textContent.replace(/const response = await fetch\('\/api\/get-menu'\);[^}]*}catch\(error\){[^}]*}/, `
+                    // This is an offline version with embedded data
+                    return ${JSON.stringify(menuData)};
+                `);
+                
+                // Setup product card listeners on page load for the downloaded version
+                const scriptAddition = document.createElement('script');
+                scriptAddition.textContent = `
+                    // Setup product card listeners on page load
+                    document.addEventListener('DOMContentLoaded', function() {
+                        setupProductCardListeners();
+                    });
+                `;
+                docClone.querySelector('body').appendChild(scriptAddition);
+                
+                // Find all images in the clone
+                const images = docClone.querySelectorAll('img');
+                
+                // Convert all images to data URLs
+                for (const img of images) {
+                    try {
+                        if (img.src && !img.src.startsWith('data:')) {
+                            const response = await fetch(img.src);
+                            const blob = await response.blob();
+                            const reader = new FileReader();
+                            
+                            await new Promise((resolve) => {
+                                reader.onloadend = function() {
+                                    img.src = reader.result;
+                                    resolve();
+                                };
+                                reader.readAsDataURL(blob);
+                            });
+                        }
+                    } catch (err) {
+                        console.warn('Could not convert image:', err);
+                        // Create a colored placeholder
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 80;
+                        canvas.height = 80;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#00c853';
+                        ctx.fillRect(0, 0, 80, 80);
+                        img.src = canvas.toDataURL('image/png');
+                    }
+                }
+                
+                // Update background image
+                const style = document.createElement('style');
+                style.textContent = `
+                    body {
+                        background-image: none !important;
+                        background-color: #121212 !important;
+                    }
+                `;
+                
+                // Append the style to head
+                head.appendChild(style);
+                
+                // Remove loading modals from the clone
+                const modals = docClone.querySelectorAll('.loading-modal');
+                if (modals) {
+                    modals.forEach(modal => modal.remove());
+                }
+                
+                // Get the HTML content from the modified clone
+                const htmlContent = '<!DOCTYPE html>\n' + docClone.outerHTML;
+                
+                // Create a blob from the HTML content
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                
+                // Create a temporary link for downloading
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'el-tio-green-menu.html';
+                link.click();
+                
+                // Clean up
+                URL.revokeObjectURL(link.href);
+                
+            } catch (error) {
+                console.error('Error creating offline version:', error);
+                alert('Hubo un error al crear la versión offline. Por favor intenta de nuevo.');
+            } finally {
+                // Hide loading modal
+                downloadModal.classList.remove('visible');
+                // Close share menu
+                document.querySelector('.share-menu').classList.remove('visible');
+            }
+        });
         
         // Call the function to generate the menu - wait for DOM to be ready
         document.addEventListener('DOMContentLoaded', function() {
