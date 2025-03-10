@@ -1,0 +1,18 @@
+{
+  "name": "el-tio-green-menu",
+  "version": "1.0.0",
+  "description": "Cannabis menu website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "npm run copy-files",
+    "copy-files": "powershell -Command \"if (-not (Test-Path dist)) { New-Item -ItemType Directory -Path dist -Force }; Copy-Item -Path public\\* -Destination dist -Recurse -Force; Copy-Item -Path src\\index.html -Destination dist -Force\""
+  },
+  "dependencies": {
+    "airtable": "^0.11.6",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "netlify-cli": "^12.0.0"
+  }
+}
