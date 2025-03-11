@@ -606,8 +606,8 @@
         /* Share button styles */
         .share-button {
             position: fixed;
-            bottom: 70px;
-            left: 15px;
+            top: 15px;           /* Cambio de bottom a top */
+            left: 15px;          /* Mantener a la izquierda */
             width: 40px;
             height: 40px;
             background-color: var(--accent);
@@ -622,9 +622,9 @@
             z-index: 100;
         }
         
-        .share-menu {
+         .share-menu {
             position: fixed;
-            bottom: 125px;
+            top: 70px;           /* Cambio de bottom a top */
             left: 15px;
             background-color: var(--card-bg);
             border-radius: 10px;
@@ -1094,6 +1094,7 @@
         padding: 15px 0;
         z-index: 100;
         overflow: hidden;
+        padding-bottom: env(safe-area-inset-bottom, 10px); /* Compatibilidad con iPhone X+ */
         }
 
         .wheel-nav {
