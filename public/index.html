@@ -6,6 +6,7 @@
     <meta property="og:title" content="El Tío Green - Premium Cannabis Menu">
     <meta property="og:description" content="Checate nuestro menu de cannabis premium; greenhouse, outdoor, hydroponic, indoor, entre otros">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://menu-el-tio-green.netlify.app/images/logo.jpg">
     <title>El Tío Green - Premium Cannabis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1779,14 +1780,280 @@
                 const container = document.getElementById('menu-content');
                 container.innerHTML = ''; // Clear existing content
                 
+
+                // Create the info section as the first section
+                const infoSection = document.createElement('section');
+                infoSection.className = 'page-section';
+                infoSection.id = 'info';
+
+                // Add graffiti element
+                const graffitiBg = document.createElement('div');
+                graffitiBg.className = 'graf-elem big-graf g1';
+                graffitiBg.textContent = "INFO";
+                infoSection.appendChild(graffitiBg);
+
+                // Add splatter effect
+                const splatter = document.createElement('div');
+                splatter.className = 'splatter s1';
+                infoSection.appendChild(splatter);
+
+                // Section header
+                const headerEl = document.createElement('div');
+                headerEl.className = 'section-header';
+
+                const logoContainer = document.createElement('div');
+                logoContainer.className = 'logo-container';
+
+                // Logo placeholder
+                const logoPlaceholder = document.createElement('div');
+                logoPlaceholder.className = 'logo-placeholder';
+                logoPlaceholder.textContent = 'LOGO';
+                logoContainer.appendChild(logoPlaceholder);
+
+                // Try to load the logo
+                if (menuData.storeInfo && menuData.storeInfo.logo) {
+                const logoImg = document.createElement('img');
+                logoImg.className = 'section-logo';
+                logoImg.alt = "Logo";
+                logoImg.style.display = 'none'; // Hide initially
+                logoImg.onload = function() {
+                    this.style.display = 'block';
+                    logoPlaceholder.style.display = 'none';
+                };
+                logoImg.onerror = function() {
+                    console.error("Failed to load logo from:", this.src);
+                };
+                logoImg.src = menuData.storeInfo.logo;
+                logoContainer.appendChild(logoImg);
+                }
+
+                headerEl.appendChild(logoContainer);
+
+                // Title and subtitle
+                const titleEl = document.createElement('h2');
+                titleEl.className = 'section-title';
+                titleEl.textContent = "Información";
+                headerEl.appendChild(titleEl);
+
+                const subtitleEl = document.createElement('p');
+                subtitleEl.className = 'section-subtitle';
+                subtitleEl.textContent = "Todo lo que necesitas saber";
+                headerEl.appendChild(subtitleEl);
+
+                infoSection.appendChild(headerEl);
+
+                // Create content container
+                const infoContent = document.createElement('div');
+                infoContent.className = 'info-content';
+
+                // Create all info blocks
+                const infoBlocks = [
+                {
+                    title: 'HORARIO',
+                    content: `
+                    <div class="info-details">
+                        <p class="info-highlight">SERVICIO DE ATENCIÓN</p>
+                        <p class="info-highlight">DE LUNES A SABADO</p>
+                        <p class="info-highlight">10:00AM A 8PM</p>
+                    </div>
+                    `
+                },
+                {
+                    title: 'ENVÍOS',
+                    content: `
+                    <div class="info-details">
+                        <p class="info-highlight">ENTREGAS PERSONALES</p>
+                        <p class="info-highlight">EN MTY, CDMX Y GDL</p>
+                        <p class="info-highlight">ENVIOS NACIONALES DE 2</p>
+                        <p class="info-highlight">A 5 DIAS HABILES</p>
+                    </div>
+                    `
+                },
+                {
+                    title: 'GARANTÍA',
+                    content: `
+                    <div class="info-details">
+                        <p class="info-highlight">SI LLEGAN A DECOMISAR</p>
+                        <p class="info-highlight">TU PAQUETE TE</p>
+                        <p class="info-highlight">REEMBOLSAMOS EL 50%</p>
+                        <p class="info-highlight">DEL PRODUCTO, SI ERES</p>
+                        <p class="info-highlight">MIEMBRO VIP EL 100%</p>
+                    </div>
+                    `
+                },
+                {
+                    title: 'TE GUSTARÍA SER MIEMBRO VIP?',
+                    content: `
+                    <div class="info-details">
+                        <p class="info-highlight">-GRUPO EXCLUSIVO PARA MIEMBROS VIP</p>
+                        <p class="info-highlight">-PROMOCIONES EXCLUSIVAS</p>
+                        <p class="info-highlight">-RIFAS Y DINAMICAS</p>
+                        <p class="info-highlight">PARA SER MIEMBROS DEL GRUPO VIP SE</p>
+                        <p class="info-highlight">NECESITAN MINIMO 10 PEDIDOS</p>
+                    </div>
+                    `
+                }
+                ];
+
+                // Create each info block
+                infoBlocks.forEach(block => {
+                const blockContainer = document.createElement('div');
+                blockContainer.className = 'info-block';
+                
+                const blockTitle = document.createElement('h3');
+                blockTitle.className = 'info-title';
+                blockTitle.innerHTML = block.title;
+                blockContainer.appendChild(blockTitle);
+                
+                const blockContent = document.createElement('div');
+                blockContent.innerHTML = block.content;
+                blockContainer.appendChild(blockContent);
+                
+                infoContent.appendChild(blockContainer);
+                });
+
+                // Add Instagram handle at the bottom
+                const instagramBlock = document.createElement('div');
+                instagramBlock.className = 'instagram-block';
+
+                const establishedText = document.createElement('div');
+                establishedText.className = 'established-text';
+                establishedText.textContent = 'ESTILO DESDE 2019';
+                instagramBlock.appendChild(establishedText);
+
+                const instagramHandle = document.createElement('div');
+                instagramHandle.className = 'instagram-handle';
+                instagramHandle.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png" class="instagram-icon" alt="Instagram"> GREENEST_BOYMX';
+                instagramBlock.appendChild(instagramHandle);
+
+                infoContent.appendChild(instagramBlock);
+                infoSection.appendChild(infoContent);
+
+                // Add the info section as the first section in the container
+                container.appendChild(infoSection);
+
+                // Now add the CSS styles for this new section
+                const styleElement = document.createElement('style');
+                styleElement.textContent = `
+                .info-content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 30px;
+                    padding: 0 10px;
+                }
+                
+                .info-block {
+                    background-color: var(--card-bg);
+                    border-radius: 15px;
+                    padding: 20px;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .info-block::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(135deg, rgba(0,200,83,0.1), transparent 70%);
+                    z-index: 1;
+                    pointer-events: none;
+                }
+                
+                .info-title {
+                    font-family: 'Permanent Marker', cursive;
+                    font-size: 1.8rem;
+                    color: var(--accent);
+                    margin-bottom: 15px;
+                    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                .info-details {
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                .info-highlight {
+                    font-family: 'Shadows Into Light', cursive;
+                    font-size: 1.2rem;
+                    color: #f0ff8c;
+                    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+                    margin-bottom: 8px;
+                    line-height: 1.4;
+                }
+                
+                .instagram-block {
+                    text-align: center;
+                    margin-top: 10px;
+                    padding: 20px 10px;
+                }
+                
+                .established-text {
+                    font-family: 'Rubik', sans-serif;
+                    font-size: 1rem;
+                    color: rgba(255,255,255,0.7);
+                    margin-bottom: 15px;
+                    letter-spacing: 2px;
+                }
+                
+                .instagram-handle {
+                    font-family: 'Permanent Marker', cursive;
+                    font-size: 1.4rem;
+                    color: #f0ff8c;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                }
+                
+                .instagram-icon {
+                    width: 24px;
+                    height: 24px;
+                }
+                
+                @media (min-width: 768px) {
+                    .info-content {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 30px;
+                    }
+                    
+                    .instagram-block {
+                    grid-column: span 2;
+                    }
+                }
+                `;
+                document.head.appendChild(styleElement);
+
+
                 // Generate desktop navigation
                 const desktopNav = document.getElementById('desktop-nav');
                 desktopNav.innerHTML = '';
                 
+                const infoDesktopNavItem = document.createElement('div');
+                infoDesktopNavItem.className = 'desktop-nav-item active'; // Active by default
+                infoDesktopNavItem.setAttribute('data-section', 'info');
+                desktopNav.appendChild(infoDesktopNavItem);
+
                 // Generate mobile navigation
                 const mobileNav = document.getElementById('mobile-nav');
                 mobileNav.innerHTML = '';
                 
+                const infoMobileNavItem = document.createElement('div');
+                infoMobileNavItem.className = 'mobile-nav-item active'; // Active by default
+                infoMobileNavItem.setAttribute('data-section', 'info');
+                infoMobileNavItem.innerHTML = `
+                <span class="mobile-nav-icon">ℹ️</span>
+                <span class="mobile-nav-text">Info</span>
+                `;
+                mobileNav.appendChild(infoMobileNavItem);
+
                 // Generate each section
                 if (menuData.sections && Array.isArray(menuData.sections)) {
                     menuData.sections.forEach((section, index) => {
@@ -1794,12 +2061,12 @@
                         
                         // Add navigation items
                         const desktopNavItem = document.createElement('div');
-                        desktopNavItem.className = 'desktop-nav-item' + (index === 0 ? ' active' : '');
+                        desktopNavItem.className = 'desktop-nav-item';
                         desktopNavItem.setAttribute('data-section', section.id || `section-${index}`);
                         desktopNav.appendChild(desktopNavItem);
                         
                         const mobileNavItem = document.createElement('div');
-                        mobileNavItem.className = 'mobile-nav-item' + (index === 0 ? ' active' : '');
+                        mobileNavItem.className = 'mobile-nav-item';
                         mobileNavItem.setAttribute('data-section', section.id || `section-${index}`);
                         
                         // Fixed this problematic code with safe handling
